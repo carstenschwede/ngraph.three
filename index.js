@@ -1,3 +1,5 @@
+//var THREE = require('./lib/three');
+
 module.exports = function (graph, settings) {
   var merge = require('ngraph.merge');
   settings = merge(settings, {
@@ -23,8 +25,9 @@ module.exports = function (graph, settings) {
   var graphics = {
     THREE: THREE, // expose THREE so that clients will not have to require it twice.
     run: run,
-    renderOneFrame: renderOneFrame,
     step: step,
+    renderOneFrame: renderOneFrame,
+
     onFrame: onFrame,
 
     /**
@@ -178,10 +181,10 @@ module.exports = function (graph, settings) {
     if (disposed) return;
     if (!isStable) {
       isStable = layout.step();
-      renderOneFrame();
+    renderOneFrame();
     }
   }
-  
+
   function run() {
     if (disposed) return;
 
@@ -247,7 +250,7 @@ module.exports = function (graph, settings) {
     // todo: this adds GC pressure. Remove functional iterators
     Object.keys(linkUI).forEach(renderLink);
     Object.keys(nodeUI).forEach(renderNode);
-    renderer.render(scene, camera);
+//    renderer.render(scene, camera);
   }
 
   function renderNode(nodeId) {
