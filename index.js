@@ -1,5 +1,3 @@
-var THREE = require('./lib/three');
-
 module.exports = function (graph, settings) {
   var merge = require('ngraph.merge');
   settings = merge(settings, {
@@ -26,7 +24,7 @@ module.exports = function (graph, settings) {
     THREE: THREE, // expose THREE so that clients will not have to require it twice.
     run: run,
     renderOneFrame: renderOneFrame,
-
+    step: step,
     onFrame: onFrame,
 
     /**
@@ -176,6 +174,14 @@ module.exports = function (graph, settings) {
     if (settings.interactive) createControls();
   }
 
+  function step() {
+    if (disposed) return;
+    if (!isStable) {
+      isStable = layout.step();
+      renderOneFrame();
+    }
+  }
+  
   function run() {
     if (disposed) return;
 
