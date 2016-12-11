@@ -3,7 +3,7 @@
 module.exports = function (graph, settings) {
   var merge = require('ngraph.merge');
   settings = merge(settings, {
-    interactive: true
+    interactive: false
   });
 
   var beforeFrameRender;
@@ -359,13 +359,7 @@ module.exports = function (graph, settings) {
   }
 
   function createControls() {
-    var Controls = require('three.trackball');
-    controls = new Controls(camera, renderer.domElement);
-    controls.panSpeed = 0.8;
-    controls.staticMoving = true;
-    controls.dynamicDampingFactor = 0.3;
-    controls.addEventListener('change', renderOneFrame);
-    graphics.controls = controls;
+ 
   }
 
   function rebuildUI() {
